@@ -13,5 +13,25 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-input label="Enter name of game" name="gameName" [(ngModel)]="gameNameInput"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!gameNameInput">Submit</ion-button>
+
+    <ion-grid *ngIf="gameDataList.length > 0">
+      <ion-row *ngFor="let item of gameDataList">
+        <ion-col size="4">
+          <img [src]="item.imageUrl" alt="Item Image">
+        </ion-col>
+        <ion-col size="8">
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.summary }}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-toast [isOpen]="isToastOpen" message="Game saved to list!" [duration]="2500"></ion-toast>
+  </form>
+
 </ion-content>
